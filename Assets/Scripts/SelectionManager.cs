@@ -2,26 +2,26 @@ using UnityEngine;
 
 public class SelectionManager : MonoBehaviour
 {
-    public static SelectionManager Instance;
+    public static SelectionManager instance;
     
     public TowerManager selectedTower;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Instance = this;
+        instance = this;
     }
 
     public void SelectTower(TowerManager tower)
     {
         if (selectedTower != null && selectedTower != tower)
         {
-            selectedTower.DeSelectTower();
+            DeselectCurrentTower();
         }
         selectedTower = tower;
         selectedTower.SelectTower();
     }
 
-    public void DeselectTower()
+    public void DeselectCurrentTower()
     {
         if (selectedTower != null)
         {
@@ -29,9 +29,5 @@ public class SelectionManager : MonoBehaviour
             selectedTower = null;
         }
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

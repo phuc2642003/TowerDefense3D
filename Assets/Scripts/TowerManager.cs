@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class TowerManager : MonoBehaviour
 {
+    [SerializeField] TowerData[] towers;
     public bool IsSelected = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -11,7 +12,9 @@ public class TowerManager : MonoBehaviour
     }
     void OnMouseDown()
     {
-        SelectionManager.Instance.SelectTower(this);
+        SelectionManager.instance.SelectTower(this);
+        UIManager.instance.ShowBuyUI(towers,this);
+        Debug.Log("Selected tower" +gameObject.name);
     }
     public void DeSelectTower()
     {
