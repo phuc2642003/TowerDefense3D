@@ -11,9 +11,9 @@ public class TowerData : ScriptableObject
     public GameObject Level3Prefab;
 
     [Header("Cost")] 
-    public float BuyCost;
-    public float UpgradeCost1;
-    public float UpgradeCost2;
+    public int BuyCost;
+    public int UpgradeCost1;
+    public int UpgradeCost2;
 
     [Header("Stats")] 
     public float Level1Range;

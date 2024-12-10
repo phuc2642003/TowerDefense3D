@@ -1,15 +1,8 @@
 using UnityEngine;
 
-public class SelectionManager : MonoBehaviour
+public class SelectionManager : Singleton<SelectionManager>
 {
-    public static SelectionManager instance;
-    
     public TowerManager selectedTower;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        instance = this;
-    }
 
     public void SelectTower(TowerManager tower)
     {

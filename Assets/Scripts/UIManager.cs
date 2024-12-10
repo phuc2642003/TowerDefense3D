@@ -1,18 +1,12 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
-    public static UIManager instance;
-    
     [SerializeField] private GameObject buyUI;
     [SerializeField] private GameObject buyButtonPrefab;
     [SerializeField] private float buttonRadius = 50f;
-
-    private void Awake()
-    {
-        instance = this;
-    }
+    
 
     private TowerManager selectedTower;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -35,10 +29,11 @@ public class UIManager : MonoBehaviour
             GameObject newButton = Instantiate(buyButtonPrefab, buyUI.transform);
             newButton.transform.localPosition = GetBuyButtonPosition(i, towers.Length);
             Button buttonComponent = newButton.GetComponent<Button>();
+            int index = i;
             if (buttonComponent != null)
             {
                 buttonComponent.onClick.RemoveAllListeners();
-                buttonComponent.onClick.AddListener(()=>BuyTower());
+                buttonComponent.onClick.AddListener(()=>tower.BuyTower(towers[index]));
             }
         }
         
@@ -56,8 +51,9 @@ public class UIManager : MonoBehaviour
         return new Vector3(xPos,yPos,0);
     }
 
-    void BuyTower()
+    public void HideUI()
     {
-        
+        selectedTower = null;
+        buyUI.SetActive(false);
     }
 }
