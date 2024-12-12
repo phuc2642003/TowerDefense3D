@@ -1,24 +1,22 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "TowerData", menuName = "Scriptable Objects/TowerData")]
 public class TowerData : ScriptableObject
 {
     public string TowerName;
+    public Sprite Icon;
     
     [Header("Prefabs")]
-    public GameObject Level1Prefab;
-    public GameObject Level2Prefab;
-    public GameObject Level3Prefab;
+    public GameObject[] PrefabObjects;
 
     [Header("Cost")] 
     public int BuyCost;
-    public int UpgradeCost1;
-    public int UpgradeCost2;
+    public int[] UpgradeCost;
+
 
     [Header("Stats")] 
-    public float Level1Range;
-    public float Level2Range;
-    public float Level3Range;
+    public float[] Range;
 
     [Space]
     public float Damage;

@@ -10,17 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 451ca063f3f941c479dc56ba31c6bef4, type: 3}
-  m_Name: ShootingTower
+  m_Name: ShooterTower
   m_EditorClassIdentifier: 
   TowerName: 
-  Level1Prefab: {fileID: 0}
-  Level2Prefab: {fileID: 0}
-  Level3Prefab: {fileID: 0}
-  BuyCost: 0
-  UpgradeCost1: 0
-  UpgradeCost2: 0
-  Level1Range: 0
-  Level2Range: 0
-  Level3Range: 0
+  Icon: {fileID: 0}
+  PrefabObjects:
+  - {fileID: 2337961875833934348, guid: d94496b50c19be044a6b901e85407d95, type: 3}
+  - {fileID: 832327546913683215, guid: e876965ef060559418a227bf57c119ed, type: 3}
+  - {fileID: 2882252133728161885, guid: 4b1005c0716d52a459ec1e1afa5aa3e9, type: 3}
+  BuyCost: 50
+  UpgradeCost: 64000000c8000000
+  Range: []
   Damage: 0
   FireRate: 0

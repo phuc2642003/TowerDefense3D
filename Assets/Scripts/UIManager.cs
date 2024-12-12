@@ -3,31 +3,42 @@ using UnityEngine;
 using UnityEngine.UI;
 public class UIManager : Singleton<UIManager>
 {
+    [Header("Buy Content")]
     [SerializeField] private GameObject buyUI;
     [SerializeField] private GameObject buyButtonPrefab;
     [SerializeField] private float buttonRadius = 50f;
     
-
+    [Header("Upgrade Content")]
+    [SerializeField] private GameObject upgradeUI;
+    [SerializeField] private GameObject sellButtonPrefab;
+    [SerializeField] private GameObject upgradeButtonPrefab;
+    
     private TowerManager selectedTower;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         buyUI.SetActive(false);    
+        upgradeUI.SetActive(false);
     }
     
     public void ShowBuyUI(TowerData[] towers, TowerManager tower)
     {   
+        buyUI.SetActive(true);
         selectedTower = tower;
 
         foreach (Transform child in buyUI.transform)
         {
-            Destroy(child.gameObject);
+            if (child.name != "CloseButton")
+            {
+                Destroy(child.gameObject);
+            }
         }
 
         for (int i = 0; i < towers.Length; i++)
         {
             GameObject newButton = Instantiate(buyButtonPrefab, buyUI.transform);
-            newButton.transform.localPosition = GetBuyButtonPosition(i, towers.Length);
+            newButton.GetComponent<BuyButton>().SetButton(towers[i].Icon, towers[i].BuyCost);
+            newButton.transform.localPosition = GetButtonPosition(i, towers.Length);
             Button buttonComponent = newButton.GetComponent<Button>();
             int index = i;
             if (buttonComponent != null)
@@ -38,10 +49,10 @@ public class UIManager : Singleton<UIManager>
         }
         
         buyUI.transform.position = Camera.main.WorldToScreenPoint(tower.gameObject.transform.position);
-        buyUI.SetActive(true);
+        
     }
 
-    Vector3 GetBuyButtonPosition(int index, int numberOfButtons)
+    Vector3 GetButtonPosition(int index, int numberOfButtons)
     {
         float angleStep = 360f / numberOfButtons;
         float angle = angleStep * index;
@@ -55,5 +66,46 @@ public class UIManager : Singleton<UIManager>
     {
         selectedTower = null;
         buyUI.SetActive(false);
+        upgradeUI.SetActive(false);
+    }
+
+    public void ShowUpgradeUI(TowerData towerData,TowerManager tower)
+    {
+        upgradeUI.SetActive(true);
+        selectedTower = tower;
+        
+        foreach (Transform child in upgradeUI.transform)
+        {
+            if (child.name != "CloseButton")
+            {
+                Destroy(child.gameObject);
+            }
+        }
+        
+        GameObject sellButton = Instantiate(sellButtonPrefab, upgradeUI.transform);
+        sellButton.transform.localPosition = GetButtonPosition(1, 2);
+        sellButton.GetComponent<SellButton>().UpdateText(tower.GetSellValue(tower.TowerLevel));
+        Button sellButtonComponent = sellButton.GetComponent<Button>();
+        if (sellButtonComponent != null)
+        {
+            sellButtonComponent.onClick.RemoveAllListeners();
+            sellButtonComponent.onClick.AddListener(() => tower.SellTower());
+        }
+
+        if (tower.TowerLevel != tower.CurrentTower.PrefabObjects.Length)
+        {
+            GameObject upgradeButton = Instantiate(upgradeButtonPrefab, upgradeUI.transform);
+            upgradeButton.transform.localPosition = GetButtonPosition(0, 2);
+            upgradeButton.GetComponent<UpgradeButton>().UpdateText(towerData.UpgradeCost[tower.TowerLevel-1]);
+            Button upgradeButtonComponent = upgradeButton.GetComponent<Button>();
+            if (upgradeButtonComponent != null)
+            {
+                upgradeButtonComponent.onClick.RemoveAllListeners();
+                upgradeButtonComponent.onClick.AddListener(() => tower.UpgradeTower());
+            }
+        }
+        
+        
+        upgradeUI.transform.position = Camera.main.WorldToScreenPoint(tower.gameObject.transform.position);
     }
 }

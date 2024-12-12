@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ResourceManager : Singleton<ResourceManager>
 {
-    private int batteries;
+    [SerializeField] private int batteries = 100;
 
     public int Batteries
     {
@@ -23,7 +23,7 @@ public class ResourceManager : Singleton<ResourceManager>
     }
     private void UpdateCurrencyUI()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
