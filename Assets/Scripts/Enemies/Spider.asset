@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyName: Spider
   EnemyPrefab: {fileID: 0}
-  health: 50
-  speed: 2
-  ReceivingReward: 10
+  health: 10
+  speed: 5
+  ReceivingReward: 50
