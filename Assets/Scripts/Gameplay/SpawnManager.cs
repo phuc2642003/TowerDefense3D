@@ -5,7 +5,8 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private WaveData[] waveData;
-    [SerializeField] private GameObject spawnPoint;
+    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private Transform endPoint;
     [SerializeField] private float TimeBetweenWaves = 2f;
     [SerializeField] private float TimeBetweenSpawns;
 
@@ -47,6 +48,6 @@ public class SpawnManager : MonoBehaviour
         GameObject enemyObject = Instantiate(enemyData.EnemyPrefab, spawnPoint.transform.position, Quaternion.identity);
 
         Enemy enemy = enemyObject.GetComponent<Enemy>();
-        enemy.Initialize(enemyData.health,enemyData.speed,enemyData.ReceivingReward);
+        enemy.Initialize(enemyData.health,enemyData.speed,enemyData.ReceivingReward,endPoint);
     }
 }

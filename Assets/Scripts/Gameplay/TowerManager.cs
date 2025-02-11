@@ -14,9 +14,7 @@ public class TowerManager : MonoBehaviour
         set => currentTower = value;
     }
 
-
     int towerLevel = 0;
-
     public int TowerLevel { get => towerLevel; set => towerLevel = value; }
 
     GameObject towerInstance;

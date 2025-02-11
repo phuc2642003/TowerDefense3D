@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Spider
   m_EditorClassIdentifier: 
   EnemyName: Spider
-  EnemyPrefab: {fileID: 0}
+  EnemyPrefab: {fileID: 3478513278335166937, guid: cde9c2ebfb877134aa20b94501ddd061, type: 3}
   health: 10
   speed: 5
   ReceivingReward: 50

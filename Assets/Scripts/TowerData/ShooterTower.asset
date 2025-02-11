@@ -20,6 +20,16 @@ MonoBehaviour:
   - {fileID: 2882252133728161885, guid: 4b1005c0716d52a459ec1e1afa5aa3e9, type: 3}
   BuyCost: 50
   UpgradeCost: 64000000c8000000
-  Range: []
-  Damage: 0
-  FireRate: 0
+  Ranges:
+  - 3
+  - 3.5
+  - 4
+  Damages:
+  - 1
+  - 1.2
+  - 1.5
+  FireRates:
+  - 1
+  - 0.9
+  - 0.85
+  RotationSpeed: 20
