@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnManager : MonoBehaviour
+public class SpawnManager : Singleton<SpawnManager>
 {
     [SerializeField] private WaveData[] waveData;
     [SerializeField] private Transform spawnPoint;
@@ -10,27 +10,41 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private float TimeBetweenWaves = 2f;
     [SerializeField] private float TimeBetweenSpawns;
 
-    int currentWaveIndex = 0;
-    bool spawning = false;
+    int currentWaveIndex;
 
-    void Start()
+    public int CurrentWaveIndex
     {
-        StartCoroutine(StartWave());
+        get { return currentWaveIndex; }
+        set
+        {
+            currentWaveIndex = value; 
+            GameplayManager.Instance.CurrentWave = currentWaveIndex + 1;
+        }
     }
 
+    private void Start()
+    {
+        GameplayManager.Instance.TotalWaves = waveData.Length;
+        Debug.Log(waveData.Length);
+    }
+    bool spawning = false;
+    
     IEnumerator StartWave()
     {
+        CurrentWaveIndex = 0;
         while (currentWaveIndex < waveData.Length)
         {
             yield return StartCoroutine(SpawnWave(waveData[currentWaveIndex]));
             //
             yield return new WaitForSeconds(TimeBetweenWaves);
 
-            currentWaveIndex++;
+            CurrentWaveIndex++;
+            Debug.Log(currentWaveIndex);
         }
         Debug.Log("Wave Ended");
+        GameplayManager.Instance.SpawnComplete();
     }
-
+    
     IEnumerator SpawnWave(WaveData wave)
     {
         for (int i = 0; i < wave.enemies.Length; i++)
@@ -50,4 +64,16 @@ public class SpawnManager : MonoBehaviour
         Enemy enemy = enemyObject.GetComponent<Enemy>();
         enemy.Initialize(enemyData.health,enemyData.speed,enemyData.ReceivingReward,endPoint);
     }
+
+    public void StartRound()
+    {
+        StartCoroutine(StartWave());
+        GUIManager.Instance.startRoundUI.SetActive(true);
+    }
+
+    public void StopSpawning()
+    {
+        StopAllCoroutines();
+    }
+    
 }

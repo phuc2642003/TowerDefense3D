@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,6 +13,8 @@ public class Enemy : MonoBehaviour
 
     public void Initialize(float _health, float _speed, int _reward, Transform _goal)
     {
+        GameplayManager.Instance.CountEnemies(1);
+        
         health = _health;
         speed = _speed;
         reward = _reward;
@@ -32,6 +35,18 @@ public class Enemy : MonoBehaviour
 
     public void Die()
     {
+        ResourceManager.Instance.GetCurrency(reward);
+        GameplayManager.Instance.CountEnemies(-1);
         Destroy(gameObject);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("POI"))
+        {
+            GameplayManager.Instance.CurrentHealth--;
+            GameplayManager.Instance.CountEnemies(-1);
+            Destroy(gameObject);
+        }
     }
 }

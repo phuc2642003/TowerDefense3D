@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2fe498a4208737348929c101cb6f7d6a, type: 3}
       propertyPath: m_Name
-      value: Base1
+      value: SlowTower_L1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -117,13 +117,64 @@ PrefabInstance:
       propertyPath: m_Name
       value: T1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a279d05c7571f9746a2587926dd728f5, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a279d05c7571f9746a2587926dd728f5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3652729511606613294}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a279d05c7571f9746a2587926dd728f5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7769978832435304206}
   m_SourcePrefab: {fileID: 100100000, guid: a279d05c7571f9746a2587926dd728f5, type: 3}
 --- !u!4 &4612953716237937844 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a279d05c7571f9746a2587926dd728f5, type: 3}
   m_PrefabInstance: {fileID: 5156121895150766943}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5426644425614718478 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a279d05c7571f9746a2587926dd728f5, type: 3}
+  m_PrefabInstance: {fileID: 5156121895150766943}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &3652729511606613294
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5426644425614718478}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 2
+  m_Center: {x: 0, y: -0.2, z: 0}
+--- !u!114 &7769978832435304206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5426644425614718478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e21e042b3990934c80ff2181d0250ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerData: {fileID: 11400000, guid: 8755a92e13797bb48939ee6ebc7478da, type: 2}
+  towerLevel: 1
+  SlowDownTime: 2

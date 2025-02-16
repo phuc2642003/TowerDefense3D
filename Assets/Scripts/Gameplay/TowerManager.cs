@@ -28,18 +28,18 @@ public class TowerManager : MonoBehaviour
         SelectionManager.Instance.SelectTower(this);
         if (towerLevel > 0)
         {
-            UIManager.Instance.ShowUpgradeUI(currentTower,this);
+            GUIManager.Instance.ShowUpgradeUI(currentTower,this);
         }
         else
         {
-            UIManager.Instance.ShowBuyUI(towers,this);
+            GUIManager.Instance.ShowBuyUI(towers,this);
         }
     }
     public void DeSelectTower()
     {
         IsSelected = false;
         
-        UIManager.Instance.HideUI();
+        GUIManager.Instance.HideUI();
     }
     public void SelectTower()
     {

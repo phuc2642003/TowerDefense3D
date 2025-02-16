@@ -13,12 +13,12 @@ public class TowerData : ScriptableObject
     [Header("Cost")] 
     public int BuyCost;
     public int[] UpgradeCost;
-
     
     [Header("Stats")] 
     public float[] Ranges;
     public float[] Damages;
     public float[] FireRates;
+    public float[] SlowDownRates;
 
     [Header("Additional Stats")]
     public float RotationSpeed;

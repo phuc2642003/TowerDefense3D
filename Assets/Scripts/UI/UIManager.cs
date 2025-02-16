@@ -1,7 +1,8 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-public class UIManager : Singleton<UIManager>
+public class GUIManager : Singleton<GUIManager>
 {
     [Header("Buy Content")]
     [SerializeField] private GameObject buyUI;
@@ -13,12 +14,32 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private GameObject sellButtonPrefab;
     [SerializeField] private GameObject upgradeButtonPrefab;
     
+    [Header("HUD Contents")] 
+    public GameObject gameOverUI;
+    public GameObject gameWonUI;
+    public GameObject startRoundUI;
+    [Header("----------------------")] 
+    public TMP_Text batteriesText;
+    public TMP_Text waveText;
+    public TMP_Text poiHealthText;
+    
     private TowerManager selectedTower;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (GameplayManager.Instance == null)
+        {
+            Debug.Log("Game Manager is null");
+        }
+        if (GUIManager.Instance == null)
+        {
+            Debug.Log("GUI Manager is null");
+        }
         buyUI.SetActive(false);    
         upgradeUI.SetActive(false);
+        // gameOverUI.SetActive(false);
+        // gameWonUI.SetActive(false);
+        startRoundUI.SetActive(true);
     }
     
     public void ShowBuyUI(TowerData[] towers, TowerManager tower)
@@ -108,4 +129,5 @@ public class UIManager : Singleton<UIManager>
         
         upgradeUI.transform.position = Camera.main.WorldToScreenPoint(tower.gameObject.transform.position);
     }
+
 }

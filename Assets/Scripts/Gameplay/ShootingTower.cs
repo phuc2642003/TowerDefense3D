@@ -12,7 +12,11 @@ public class ShootingTower : MonoBehaviour, ITower
     private Transform targetEnemy;
     private SphereCollider Dectection;
     private float damage;
-    private float shootingRate;
+    private float fireRate;
+    private float shootInterval= 0.1f;
+    private float nextShotTime = 0;
+    private bool canShoot = true;
+    
     private void Start()
     {
         Initialize();
@@ -26,8 +30,8 @@ public class ShootingTower : MonoBehaviour, ITower
         {
             Dectection.radius = towerData.Ranges[towerLevel-1];
         }
-        // damage = towerData.Damages[towerLevel-1];
-        // shootingRate = towerData.FireRates[towerLevel-1];
+         damage = towerData.Damages[towerLevel-1]; 
+         fireRate = towerData.FireRates[towerLevel-1];
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -49,40 +53,58 @@ public class ShootingTower : MonoBehaviour, ITower
     {
         while (true)
         {
+            nextShotTime -= Time.deltaTime;
+            if (nextShotTime <= 0)
+            {
+                canShoot = true;
+            }
             if (enemiesInRange.Count > 0)
             {
                 targetEnemy = GetClosetEnemy();
                 if (targetEnemy)
                 {
                     RotateTowardsEnemy();
-                    ShootEnemy();
-                    yield return new WaitForSeconds(shootingRate);
+                    if (canShoot)
+                    {
+                        StartCoroutine(ShootEnemy());
+                        nextShotTime = fireRate;
+                        canShoot = false;
+                    }
                 }
             }
             else
             {
                 targetEnemy = null;
+                
             }
-
-            yield return null;//wait until sth happens
+            yield return null;
         }
     }
 
     Transform GetClosetEnemy()
     {
-        Transform closetEnemy = null;
-        float closetDistance = Mathf.Infinity;
-        foreach (Transform enemy in enemiesInRange)
+        try
         {
-            float distance = Vector3.Distance(enemy.position, transform.position);
-            if (closetDistance > distance)
+            Transform closetEnemy = null;
+            float closetDistance = Mathf.Infinity;
+            
+            foreach (Transform enemy in enemiesInRange)
             {
-                closetDistance = distance;
-                closetEnemy = enemy;
+                float distance = Vector3.Distance(enemy.position, transform.position);
+                if (closetDistance > distance)
+                {
+                    closetDistance = distance;
+                    closetEnemy = enemy;
+                }
             }
-        }
 
-        return closetEnemy;
+            return closetEnemy;
+        }
+        catch (Exception e)
+        {
+            enemiesInRange.RemoveAll(enemy => enemy == null);
+            return GetClosetEnemy();
+        }
     }
 
     void RotateTowardsEnemy()
@@ -94,7 +116,7 @@ public class ShootingTower : MonoBehaviour, ITower
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * towerData.RotationSpeed);
     }
 
-    void ShootEnemy()
+    IEnumerator ShootEnemy()
     {
         foreach (Transform spawnPoint in spawnPoints)
         {
@@ -105,6 +127,7 @@ public class ShootingTower : MonoBehaviour, ITower
             {
                 projectileScript.SetTarget(targetEnemy, damage);
             }
+            yield return new WaitForSeconds(shootInterval);
         }
     }
 }

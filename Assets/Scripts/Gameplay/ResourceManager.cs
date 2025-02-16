@@ -7,13 +7,20 @@ public class ResourceManager : Singleton<ResourceManager>
     public int Batteries
     {
         get => batteries;
-        set => batteries = value;
+        set
+        {
+            batteries = value;
+            UpdateCurrencyUI();
+        }
     }
 
+    void Start()
+    {
+        UpdateCurrencyUI(); 
+    }
     public void SpendCurrency(int amount)
     {
         batteries -= amount;
-        UpdateCurrencyUI();
     }
 
     public void GetCurrency(int amount)
@@ -23,18 +30,7 @@ public class ResourceManager : Singleton<ResourceManager>
     }
     private void UpdateCurrencyUI()
     {
-        
+        GUIManager.Instance.batteriesText.text = batteries.ToString();
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

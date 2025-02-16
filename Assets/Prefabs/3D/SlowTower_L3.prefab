@@ -52,11 +52,62 @@ PrefabInstance:
       propertyPath: m_Name
       value: T3
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 404cbd7dbef3b334f810a3043676ff33, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 404cbd7dbef3b334f810a3043676ff33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4316647951995849652}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 404cbd7dbef3b334f810a3043676ff33, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1817647874414766701}
   m_SourcePrefab: {fileID: 100100000, guid: 404cbd7dbef3b334f810a3043676ff33, type: 3}
+--- !u!1 &3585794697151193876 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 404cbd7dbef3b334f810a3043676ff33, type: 3}
+  m_PrefabInstance: {fileID: 4396116416103718469}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &4316647951995849652
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3585794697151193876}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.7466541
+  m_Center: {x: 0, y: -0.2, z: 0}
+--- !u!114 &1817647874414766701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3585794697151193876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e21e042b3990934c80ff2181d0250ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerData: {fileID: 11400000, guid: 8755a92e13797bb48939ee6ebc7478da, type: 2}
+  towerLevel: 3
+  SlowDownTime: 2
 --- !u!4 &4217794686957222318 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 404cbd7dbef3b334f810a3043676ff33, type: 3}
@@ -112,7 +163,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a2ae596219d2efa4a93bdb9ef7cd6d9a, type: 3}
       propertyPath: m_Name
-      value: Base3
+      value: SlowTower_L3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
