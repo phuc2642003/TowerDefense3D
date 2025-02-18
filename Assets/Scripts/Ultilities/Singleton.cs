@@ -16,7 +16,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
     public virtual void Awake()
     {
-        MakeSingleton(true);
+        MakeSingleton(false);
     }
 
     public void MakeSingleton(bool destroyOnload)

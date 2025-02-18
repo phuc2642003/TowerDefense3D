@@ -41,6 +41,7 @@ public class GameWinState : IState
 {
     public void Enter()
     {
+        GUIManager.Instance.gameWonUI.SetActive(true);
         Debug.Log("Win Game");
     }
 
@@ -58,6 +59,7 @@ public class GameLoseState : IState
 {
     public void Enter()
     {
+        GUIManager.Instance.gameOverUI.SetActive(true);
         SpawnManager.Instance.StopSpawning();
         Time.timeScale = 0;
         Debug.Log("Lose Game");

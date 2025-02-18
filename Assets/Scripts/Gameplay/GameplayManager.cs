@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(StateManager))]
 public class GameplayManager : Singleton<GameplayManager>
@@ -33,7 +34,7 @@ public class GameplayManager : Singleton<GameplayManager>
         }
     }
     public int CurrentHealth
-    {
+    {   
         get => currentHealth;
         set
         {
@@ -73,7 +74,7 @@ public class GameplayManager : Singleton<GameplayManager>
 
     public void CheckWinCondition()
     {
-        if (allEnemiesSpawned && enemyAmount == 0)
+        if (allEnemiesSpawned && enemyAmount <1)
         {
             gameplayState.ChangeState(new GameWinState());
         }
@@ -85,5 +86,16 @@ public class GameplayManager : Singleton<GameplayManager>
         {
             gameplayState.ChangeState(new GameLoseState());
         }
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene("Gameplay");
+        gameplayState.ChangeState(new PrepareState());
+    }
+
+    public void Exit()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }

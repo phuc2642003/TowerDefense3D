@@ -22,8 +22,14 @@ public class SpawnManager : Singleton<SpawnManager>
         }
     }
 
+    public override void Awake()
+    {
+        base.Awake();
+    }
+
     private void Start()
     {
+        CurrentWaveIndex = 0;
         GameplayManager.Instance.TotalWaves = waveData.Length;
         Debug.Log(waveData.Length);
     }
@@ -31,7 +37,6 @@ public class SpawnManager : Singleton<SpawnManager>
     
     IEnumerator StartWave()
     {
-        CurrentWaveIndex = 0;
         while (currentWaveIndex < waveData.Length)
         {
             yield return StartCoroutine(SpawnWave(waveData[currentWaveIndex]));

@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
         
         agent = GetComponent<NavMeshAgent>();
         agent.destination = goal.position;  
+        agent.speed = speed;
     }
 
     public void TakeDamage(float damage)

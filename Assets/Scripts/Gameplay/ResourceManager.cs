@@ -4,6 +4,11 @@ public class ResourceManager : Singleton<ResourceManager>
 {
     [SerializeField] private int batteries = 100;
 
+    public override void Awake()
+    {
+        base.Awake();
+    }
+
     public int Batteries
     {
         get => batteries;
@@ -21,6 +26,7 @@ public class ResourceManager : Singleton<ResourceManager>
     public void SpendCurrency(int amount)
     {
         batteries -= amount;
+        UpdateCurrencyUI();
     }
 
     public void GetCurrency(int amount)

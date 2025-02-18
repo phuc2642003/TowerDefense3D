@@ -24,6 +24,12 @@ public class GUIManager : Singleton<GUIManager>
     public TMP_Text poiHealthText;
     
     private TowerManager selectedTower;
+
+    public override void Awake()
+    {
+        base.Awake();
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -37,8 +43,8 @@ public class GUIManager : Singleton<GUIManager>
         }
         buyUI.SetActive(false);    
         upgradeUI.SetActive(false);
-        // gameOverUI.SetActive(false);
-        // gameWonUI.SetActive(false);
+        gameOverUI.SetActive(false); 
+        gameWonUI.SetActive(false);
         startRoundUI.SetActive(true);
     }
     
